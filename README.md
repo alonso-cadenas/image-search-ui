@@ -28,6 +28,8 @@ Run in development mode at http://localhost:3000.
 npm run dev
 ```
 
+Use [ngrok](https://ngrok.com/docs/getting-started) to avoid CORS issues with HTTP error code 429 due to running on localhost.
+
 ### Lint
 
 Use ESLint to automatically fix linting errors.
