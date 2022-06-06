@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import type { FC } from 'react';
 
-const Footer: FC = () => (
-  <footer className="flex h-24 w-full items-center justify-center border-t">
+const Footer: FC = (): JSX.Element => (
+  <footer className="flex h-16 w-full items-center justify-center border-t mt-8">
     <a
-      className="flex items-center justify-center gap-2"
+      className="font-bold hover:text-violet-800 text-violet-600 flex items-center justify-center gap-2 pt-2"
       href="https://github.com/alonso-cadenas/image-search-ui"
       target="_blank"
       rel="noopener noreferrer"
