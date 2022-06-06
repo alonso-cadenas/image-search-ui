@@ -8,6 +8,7 @@ This application allows a user to search and view images from [Imgur](https://im
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
 ## How to use
 
@@ -31,6 +32,14 @@ Use ESLint to automatically fix linting errors.
 
 ```bash
 npm run lint
+```
+
+### Format
+
+Use Prettier to automatically format all files.
+
+```bash
+npm run format
 ```
 
 ### Build & Run

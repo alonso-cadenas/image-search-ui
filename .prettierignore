@@ -4,5 +4,8 @@
 /.next/
 /out/
 
+# npm
+package-lock.json
+
 # testing
 /coverage
