@@ -9,15 +9,16 @@ export const getImages = async (
   searchTerm: string
 ): Promise<Array<ImgurGallery>> => {
   try {
-    const data = await fetch(
-      `https://api.imgur.com/3/gallery/search/?q=${searchTerm}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_IMGUR_HOSTNAME}/gallery/search/?q=${searchTerm}`,
       {
         headers: new Headers({
-          Authorization: 'Client-ID b067d5cb828ec5a',
+          Authorization: `${process.env.NEXT_PUBLIC_IMGUR_AUTH_HEADER}`,
         }),
       }
     );
-    return data.json();
+    const { data } = await response.json();
+    return data;
   } catch (e) {
     console.error('Unable to fetch images: ', e);
     return [];

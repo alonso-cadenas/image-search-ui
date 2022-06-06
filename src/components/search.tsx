@@ -16,7 +16,9 @@ export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
   useEffect(() => {
     const handler = setTimeout(async () => {
       if (searchTerm.length > 0) {
-        setResults(await getImages(searchTerm));
+        const data = await getImages(searchTerm);
+        console.log(data);
+        setResults(data);
       } else {
         setResults([]);
       }

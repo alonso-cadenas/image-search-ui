@@ -14,8 +14,10 @@ This application allows a user to search and view images from [Imgur](https://im
 
 ### Installation
 
+Install package dependencies and set up `.env.local` variables
+
 ```bash
-npm install
+npm install && npm run env
 ```
 
 ### Local Development
