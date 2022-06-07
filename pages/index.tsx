@@ -9,7 +9,7 @@ const Home: NextPage = () => {
         Welcome to <span className="text-violet-600">Image Search</span>!
       </h1>
 
-      <Search setIsSearching={() => {}} setResults={() => {}} />
+      <Search />
     </Layout>
   );
 };

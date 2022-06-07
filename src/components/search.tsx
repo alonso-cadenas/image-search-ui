@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getImages } from '../utils/get-images';
 import { sanitize } from '../utils/sanitize';
+import SearchButton from './search-button';
+import SearchIcon from './search-icon';
 
 const debounceTimeout = 250;
-const imageTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
 
-type Props = {
-  setIsSearching: Function;
-  setResults: Function;
-};
-
-export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
+export const Search = (): JSX.Element => {
+  const [isSearching, setIsSearching] = useState(false);
+  const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -30,62 +28,64 @@ export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
     };
   }, [searchTerm, setIsSearching, setResults]);
 
+  const renderResults = () => {
+    if (isSearching) {
+      return <p id="search-gallery-results">Searching...</p>;
+    }
+
+    if (searchTerm && !results?.length) {
+      return (
+        <p id="search-gallery-results">
+          No results found - please try a different search query...
+        </p>
+      );
+    }
+
+    // return results.map((parentCategory, i) => (
+    //   <CategoriesResultComponent
+    //     countryCode={countryCode}
+    //     parentCategory={parentCategory}
+    //     key={i}
+    //   />
+    // ));
+  };
+
   return (
-    <section className="w-full sm:max-w-2xl my-6 text-xl" id="search-images">
-      <label className="relative block" htmlFor="search-images-input">
-        <span className="absolute inset-y-0 left-0 flex items-center px-2">
-          <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </span>
-        <span className="sr-only">Search</span>
-        <input
-          aria-label="search-images"
-          autoComplete="off"
-          className="block bg-white w-full border border-slate-300 rounded-md py-2 shadow-sm placeholder:text-slate-600 focus:outline-none focus:border-violet-500 focus:ring-violet-500 focus:ring-1 text-center"
-          id="search-images-input"
-          onChange={(e) => {
-            const value = sanitize(e?.target?.value);
-            if (value !== searchTerm) {
-              setIsSearching(true);
-              setSearchTerm(value);
-            }
-          }}
-          placeholder="Search for images in Imgur"
-          type="text"
-          value={searchTerm}
-        />
-        {!!searchTerm.length && (
-          <button
-            aria-label="Clear the query"
-            className="absolute inset-y-0 right-0 flex items-center px-2"
-            id="search-images-button"
-            onClick={(e) => {
-              e?.preventDefault();
-              if (searchTerm.length) {
-                setSearchTerm('');
+    <>
+      <section className="w-full sm:max-w-2xl my-6 text-xl" id="search-images">
+        <label className="relative block" htmlFor="search-images-input">
+          <SearchIcon />
+          <span className="sr-only">Search</span>
+          <input
+            aria-label="search-images"
+            autoComplete="off"
+            className="block bg-white w-full border border-slate-300 rounded-md py-2 shadow-sm placeholder:text-slate-600 focus:outline-none focus:border-violet-500 focus:ring-violet-500 focus:ring-1 text-center"
+            id="search-images-input"
+            onChange={(e) => {
+              const value = sanitize(e?.target?.value);
+              if (value !== searchTerm) {
+                setIsSearching(true);
+                setSearchTerm(value);
               }
             }}
-            type="reset"
-          >
-            <svg className="h-5 w-5" viewBox="0 0 20 20">
-              <path
-                d="M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z"
-                stroke="gray"
-                fill="none"
-                fillRule="evenodd"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-            </svg>
-          </button>
-        )}
-      </label>
-    </section>
+            placeholder="Search for images in Imgur"
+            type="text"
+            value={searchTerm}
+          />
+          {!!searchTerm.length && (
+            <SearchButton
+              handleOnClick={(e) => {
+                e?.preventDefault();
+                if (searchTerm.length) {
+                  setSearchTerm('');
+                }
+              }}
+            />
+          )}
+        </label>
+      </section>
+      {renderResults()}
+    </>
   );
 };
 
