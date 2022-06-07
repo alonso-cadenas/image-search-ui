@@ -31,7 +31,7 @@ export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
   }, [searchTerm, setIsSearching, setResults]);
 
   return (
-    <form className="w-full sm:max-w-2xl my-6 text-xl" id="search-images">
+    <section className="w-full sm:max-w-2xl my-6 text-xl" id="search-images">
       <label className="relative block" htmlFor="search-images-input">
         <span className="absolute inset-y-0 left-0 flex items-center px-2">
           <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
@@ -46,7 +46,7 @@ export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
         <input
           aria-label="search-images"
           autoComplete="off"
-          className="block bg-white w-full border border-slate-300 rounded-md py-2 shadow-sm placeholder:italic placeholder:text-slate-600 focus:outline-none focus:border-violet-500 focus:ring-violet-500 focus:ring-1 text-center"
+          className="block bg-white w-full border border-slate-300 rounded-md py-2 shadow-sm placeholder:text-slate-600 focus:outline-none focus:border-violet-500 focus:ring-violet-500 focus:ring-1 text-center"
           id="search-images-input"
           onChange={(e) => {
             const value = sanitize(e?.target?.value);
@@ -85,7 +85,7 @@ export const Search = ({ setIsSearching, setResults }: Props): JSX.Element => {
           </button>
         )}
       </label>
-    </form>
+    </section>
   );
 };
 
