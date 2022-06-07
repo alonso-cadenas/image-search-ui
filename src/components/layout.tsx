@@ -15,7 +15,7 @@ const Layout: FC<Props> = ({ children }: Props): JSX.Element => (
       <meta name="description" content="Search and view images from Imgur." />
     </Head>
 
-    <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+    <main className="flex w-full flex-1 flex-col items-center justify-center px-4 text-center">
       {children}
     </main>
 
