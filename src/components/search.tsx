@@ -1,21 +1,24 @@
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
+import { ImgurGallery } from '../models/imgur-gallery';
 import { getImages } from '../utils/get-images';
 import { sanitize } from '../utils/sanitize';
 import SearchButton from './search-button';
 import SearchIcon from './search-icon';
 
+const Gallery = dynamic(() => import('./gallery'));
+
 const debounceTimeout = 250;
 
 export const Search = (): JSX.Element => {
-  const [isSearching, setIsSearching] = useState(false);
-  const [results, setResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [results, setResults] = useState<Array<ImgurGallery>>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     const handler = setTimeout(async () => {
       if (searchTerm.length > 0) {
         const data = await getImages(searchTerm);
-        console.log(data);
         setResults(data);
       } else {
         setResults([]);
@@ -41,13 +44,9 @@ export const Search = (): JSX.Element => {
       );
     }
 
-    // return results.map((parentCategory, i) => (
-    //   <CategoriesResultComponent
-    //     countryCode={countryCode}
-    //     parentCategory={parentCategory}
-    //     key={i}
-    //   />
-    // ));
+    return results.map((gallery: ImgurGallery, i: number) => (
+      <Gallery gallery={gallery} key={i} />
+    ));
   };
 
   return (
