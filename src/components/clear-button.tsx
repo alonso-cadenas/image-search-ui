@@ -4,7 +4,7 @@ type Props = {
   handleOnClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const SearchButton: FC<Props> = ({ handleOnClick }: Props): JSX.Element => (
+const ClearButton: FC<Props> = ({ handleOnClick }: Props): JSX.Element => (
   <button
     aria-label="Clear the query"
     className="absolute inset-y-0 right-0 flex items-center px-2"
@@ -25,4 +25,4 @@ const SearchButton: FC<Props> = ({ handleOnClick }: Props): JSX.Element => (
   </button>
 );
 
-export default SearchButton;
+export default ClearButton;

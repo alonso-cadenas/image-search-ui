@@ -18,22 +18,22 @@ const Gallery: FC<Props> = ({ gallery }: Props): JSX.Element | null => {
 
   return (
     <section
-      className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
+      className="border rounded-md w-full sm:max-w-lg mx-auto my-2 p-4"
       id={`gallery-${gallery?.id}`}
     >
-      <h2 className="text-2xl font-semibold tracking-tight">
+      <h2 className="mb-2 text-2xl font-semibold tracking-tight">
         {gallery?.title}
       </h2>
 
       <section>
         {images.map((image: ImgurImage, i: number) => (
           <Image
-            src={image.link}
             alt={image.title}
-            layout="responsive"
-            width={700}
-            height={475}
+            height={image.height}
             key={i}
+            layout="responsive"
+            src={image.link}
+            width={image.width}
           />
         ))}
       </section>

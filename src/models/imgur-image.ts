@@ -4,4 +4,6 @@ export type ImgurImage = {
   description: string;
   type: string;
   link: string;
+  height: string;
+  width: string;
 };
